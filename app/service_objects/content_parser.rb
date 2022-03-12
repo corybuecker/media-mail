@@ -10,22 +10,14 @@ class ContentParser
   end
 
   def parse
-    Kramdown::Document.new(main || container || everything).to_html
+    Kramdown::Document.new(paragraphs).to_html
   end
 
   private
 
   attr_accessor :document
 
-  def main
-    document.css('main')&.text&.strip
-  end
-
-  def container
-    document.css('.container')&.text&.strip&.gsub('/t', '')
-  end
-
-  def everything
-    document.text.strip
+  def paragraphs
+    document.search('p').collect(&:text).join("\n\n")
   end
 end
