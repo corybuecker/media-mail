@@ -10,22 +10,10 @@ class ContentParser
   end
 
   def parse
-    Kramdown::Document.new(main || container || everything).to_html
+    Sanitize.fragment(document.search('body').first, Sanitize::Config::BASIC)
   end
 
   private
 
   attr_accessor :document
-
-  def main
-    document.css('main')&.text&.strip
-  end
-
-  def container
-    document.css('.container')&.text&.strip&.gsub('/t', '')
-  end
-
-  def everything
-    document.text.strip
-  end
 end

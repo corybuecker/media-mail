@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# migration
 class Page < ApplicationRecord
   belongs_to :link
 

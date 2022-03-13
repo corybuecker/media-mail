@@ -73,8 +73,8 @@ Rails.application.configure do
   # config.action_mailer.smtp_settings = {
   #   address: 'smtp.mailgun.org',
   #   port: 587,
-  #   domain: 'make-hay.dev',
-  #   user_name: 'postmaster@make-hay.dev',
+  #   domain: 'mg.mediamail.dev',
+  #   user_name: 'postmaster@mg.mediamail.dev',
   #   password: Rails.application.credentials.mailgun.password,
   #   enable_starttls_auto: true
   # }
