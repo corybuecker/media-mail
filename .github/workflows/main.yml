@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/make_hay_test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/mediamail_test
     services:
       postgres:
         image: postgres:alpine

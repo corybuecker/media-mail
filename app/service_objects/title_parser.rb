@@ -10,7 +10,11 @@ class TitleParser
   end
 
   def parse
-    document.css('h1')&.first&.text&.strip || 'Unknown'
+    [
+      document.search('head title')&.text&.strip,
+      document.search('body h1')&.first&.text&.strip,
+      'Unknown'
+    ].compact.first
   end
 
   private

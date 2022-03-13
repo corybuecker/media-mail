@@ -10,14 +10,10 @@ class ContentParser
   end
 
   def parse
-    Kramdown::Document.new(paragraphs).to_html
+    Sanitize.fragment(document.search('body').first, Sanitize::Config::BASIC)
   end
 
   private
 
   attr_accessor :document
-
-  def paragraphs
-    document.search('p').collect(&:text).join("\n\n")
-  end
 end
