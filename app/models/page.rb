@@ -11,4 +11,12 @@ class Page < ApplicationRecord
   }, default: :unprocessed
 
   validates :processing_status, presence: true
+
+  after_update_commit :send_to_turbo_stream
+
+  private
+
+  def send_to_turbo_stream
+    broadcast_replace_to(:links, target: link, partial: 'links/link', locals: { link:, page: self })
+  end
 end

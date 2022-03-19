@@ -16,7 +16,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_190340) do
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
-  create_enum "pages_statuses", ["unprocessed", "fetched", "parsed", "sent"]
   create_enum "processing_statuses", ["unprocessed", "fetched", "parsed", "sent"]
 
   create_table "links", force: :cascade do |t|
