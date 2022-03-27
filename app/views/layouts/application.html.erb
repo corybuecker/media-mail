@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mediamail</title>
+    <title>Media Mail</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons">
@@ -15,11 +15,12 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <main class="container mx-auto mt-28 px-5">
       <turbo-frame id="flash">
         <%= render 'shared/flash' %>
       </turbo-frame>
       <%= yield %>
     </main>
+
   </body>
 </html>

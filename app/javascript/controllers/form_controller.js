@@ -6,6 +6,6 @@ export default class extends Controller {
   connect() {
     MDCRipple.attachTo((this.element.querySelector("button")))
 
-    const textField = new MDCTextField(document.querySelector('.mdc-text-field'))
+    this.element.querySelectorAll('.mdc-text-field').forEach(el => { new MDCTextField(el) })
   }
 }
