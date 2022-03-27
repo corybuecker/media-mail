@@ -1,0 +1,5 @@
+<div id=<%= dom_id(link) %>>
+  <h1><%= page&.title %></h1>
+  <div><%= link.url %></div>
+  <%= button_to "delete", link, method: :delete %>
+</div>

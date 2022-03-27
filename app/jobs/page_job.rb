@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PageJob < ApplicationJob
+  queue_as :default
+
   def perform(link)
     page = Page.find_or_create_by(link_id: link.id)
 

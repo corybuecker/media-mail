@@ -1,4 +1,9 @@
-<div>
-  <h1 class="font-bold text-4xl">Links#index</h1>
-  <p>Find me in app/views/links/index.html.erb</p>
-</div>
+<%= render partial: 'form' %>
+
+<%= turbo_frame_tag "links" do %>
+  <% links.each do |link| %>
+    <%= render partial: 'link', locals: { link: link, page: link.page } %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream_from :links %>

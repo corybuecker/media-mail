@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "form" do %>
+  <%= form_for Link.new, builder: MdcFormBuilder, data: { controller: "form" } do |f| %>
+    <%= f.text_field :url %>
+    <%= f.button "Submit", type:"submit", class: "mdc-button--raised" %>
+  <% end %>
+<% end %>
