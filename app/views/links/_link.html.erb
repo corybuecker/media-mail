@@ -1,5 +1,11 @@
-<div id=<%= dom_id(link) %>>
-  <h1><%= page&.title %></h1>
-  <div><%= link.url %></div>
-  <%= button_to "delete", link, method: :delete %>
+<div class="mdc-card mdc-card--outlined max-w-md" id=<%= dom_id(link) %>>
+  <div class="p-[16px]">
+    <%= link_to page&.title, link_path(link.id) %>
+    <div class="truncate"><%= link.url %></div>
+  </div>
+  <div class="mdc-card__actions">
+    <%= form_for link, builder: MaterialFormBuilder, method: :delete, data: { controller: "form" }, html: { class: "inline mdc-card__action" } do |f| %>
+      <%= f.button "Delete", type:"submit", class: "mdc-card__action mdc-card__action--button" %>
+    <% end %>
+  </div>
 </div>

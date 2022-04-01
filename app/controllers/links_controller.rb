@@ -1,46 +1,31 @@
 # frozen_string_literal: true
 
 class LinksController < ApplicationController
-  before_action :initialize_link, only: [:create]
-
   def index
-    render locals: { links: Link.all.includes(:page) }
+    render locals: { links: Link.all.order(created_at: :desc).includes(:page) }
+  end
+
+  def show
+    render locals: { link: Link.find(params[:id]) }
   end
 
   def create
-    if (link = initialize_link) && link.save
-      render turbo_stream: turbo_updates_for_create(link)
-    else
-      flash.now[:error] = link.errors.full_messages.join(', ')
-      render turbo_stream: turbo_stream.update('flash', partial: 'shared/flash')
-    end
+    link = Link.new(create_params)
+    return render locals: { link:, page: link.page } if link.save
+
+    render_flash_error(link.errors.full_messages.join(', ').strip)
   end
 
   def destroy
     link = Link.find(params[:id])
+    return render locals: { link: } if link.destroy
 
-    if link.destroy
-      render turbo_stream: turbo_stream.remove(link)
-    else
-      flash.now[:error] = link.errors.full_messages.join(', ')
-      render turbo_stream: turbo_stream.update('flash', partial: 'shared/flash')
-    end
+    render_flash_error(link.errors.full_messages.join(', ').strip)
   end
 
   private
 
   def create_params
     params.require(:link).permit(:url)
-  end
-
-  def initialize_link
-    Link.new(create_params)
-  end
-
-  def turbo_updates_for_create(link)
-    [
-      turbo_stream.append(:links, partial: 'links/link', locals: { link:, page: link.page }),
-      turbo_stream.replace(:form, partial: 'links/form')
-    ]
   end
 end

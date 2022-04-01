@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :links, only: %i[index create destroy]
+  get 'bookmarks/create'
+  resources :links, only: %i[index create destroy show]
+
+  get 'bookmark', to: 'bookmarks#create'
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
