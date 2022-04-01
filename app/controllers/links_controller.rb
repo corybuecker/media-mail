@@ -2,7 +2,7 @@
 
 class LinksController < ApplicationController
   def index
-    render locals: { links: Link.all.includes(:page) }
+    render locals: { links: Link.all.order(created_at: :desc).includes(:page) }
   end
 
   def show
@@ -12,12 +12,14 @@ class LinksController < ApplicationController
   def create
     link = Link.new(create_params)
     return render locals: { link:, page: link.page } if link.save
+
     render_flash_error(link.errors.full_messages.join(', ').strip)
   end
 
   def destroy
     link = Link.find(params[:id])
-    return render locals: { link: link } if link.destroy
+    return render locals: { link: } if link.destroy
+
     render_flash_error(link.errors.full_messages.join(', ').strip)
   end
 

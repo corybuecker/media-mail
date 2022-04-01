@@ -10,8 +10,10 @@ class PageJob < ApplicationJob
     raw = PageFetcher.fetch(url: link.url)
     page.update!(raw:, processing_status: :fetched)
 
-    parsed = ContentParser.parse(contents: raw)
     title = TitleParser.parse(contents: raw)
+    page.update!(title:)
+
+    parsed = ContentParser.parse(contents: raw)
 
     page.update!(parsed:, processing_status: :parsed, title:)
 

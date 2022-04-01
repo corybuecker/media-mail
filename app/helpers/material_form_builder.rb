@@ -20,11 +20,12 @@ class MaterialFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def button(value = nil, options = {}, &block)
     classes = options[:class].split + ['mdc-button', 'mdc-button--touch']
     options[:class] = classes.compact.uniq.join(' ').strip
 
-    tag.div(class: "mdc-touch-target-wrapper") do
+    tag.div(class: 'mdc-touch-target-wrapper') do
       button_tag(nil, options) do
         tag.div(class: 'mdc-button__ripple') +
           tag.div(class: 'mdc-button__touch') +
@@ -34,6 +35,7 @@ class MaterialFormBuilder < ActionView::Helpers::FormBuilder
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   private
