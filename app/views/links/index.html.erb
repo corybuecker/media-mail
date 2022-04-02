@@ -6,4 +6,4 @@
   <% end %>
 </div>
 
-<%= turbo_stream_from :links, channel: LinksChannel %>
+<%= turbo_stream_from user.identity, :links, channel: LinksChannel %>

@@ -17,6 +17,7 @@ class Page < ApplicationRecord
   private
 
   def send_to_turbo_stream
-    LinksChannel.broadcast_replace_to(:links, target: link, partial: 'links/link', locals: { link:, page: self })
+    LinksChannel.broadcast_replace_later_to(link.user.identity, :links, target: link, partial: 'links/link',
+                                                                        locals: { link:, page: self })
   end
 end

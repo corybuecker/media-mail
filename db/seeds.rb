@@ -8,6 +8,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 Link.destroy_all
+User.destroy_all
+
+user = User.create!(email: 'test@mediamail.dev')
 
 links = [
   'https://corybuecker.com',
@@ -15,5 +18,5 @@ links = [
 ]
 
 links.each do |url|
-  Link.create(url:).tap(&:create_page!)
+  Link.create(url:, user:).tap(&:create_page!)
 end

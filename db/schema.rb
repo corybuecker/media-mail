@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_12_190340) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_09_115714) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,18 +22,30 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_12_190340) do
     t.string "url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["url"], name: "index_links_on_url", unique: true
+    t.bigint "user_id", null: false
+    t.index ["user_id", "url"], name: "index_links_on_user_id_and_url", unique: true
+    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "pages", force: :cascade do |t|
-    t.bigint "link_id", null: false
     t.binary "raw"
     t.binary "parsed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
     t.enum "processing_status", default: "unprocessed", null: false, enum_type: "processing_statuses"
+    t.bigint "link_id", null: false
     t.index ["link_id"], name: "index_pages_on_link_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "identity", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  add_foreign_key "links", "users", on_delete: :cascade
+  add_foreign_key "pages", "links", on_delete: :cascade
 end
