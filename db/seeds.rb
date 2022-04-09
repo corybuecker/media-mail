@@ -18,5 +18,5 @@ links = [
 ]
 
 links.each do |url|
-  Link.create(url:, user:).tap(&:create_page!)
+  Link.create(url:, user:)
 end
