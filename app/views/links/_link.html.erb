@@ -4,7 +4,7 @@
     <div class="truncate"><%= link.url %></div>
   </div>
   <div class="mdc-card__actions">
-    <%= form_for link, builder: MaterialFormBuilder, method: :delete, data: { controller: "form" }, html: { class: "inline mdc-card__action" } do |f| %>
+    <%= form_with model: link, builder: MaterialFormBuilder, method: :delete, data: { controller: "material-web-rails" }, html: { class: "inline mdc-card__action" } do |f| %>
       <%= f.button "Delete", type:"submit", class: "mdc-card__action mdc-card__action--button" %>
     <% end %>
   </div>

@@ -16,7 +16,5 @@ class PageJob < ApplicationJob
     parsed = ContentParser.parse(contents: raw)
 
     page.update!(parsed:, processing_status: :parsed, title:)
-
-    NewsletterMailer.with(contents: page.parsed, title: page.title).page.deliver_later
   end
 end
