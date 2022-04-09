@@ -1,9 +1,7 @@
 <%= render partial: 'form' %>
 
 <div id="links" class="flex flex-row flex-wrap items-start gap-2">
-  <% links.each do |link| %>
-    <%= render partial: 'link', locals: { link: link, page: link.page } %>
-  <% end %>
+  <%= render links %>
 </div>
 
 <%= turbo_stream_from user.identity, :links, channel: LinksChannel %>

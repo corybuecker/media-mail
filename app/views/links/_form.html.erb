@@ -1,5 +1,5 @@
 <div class="mb-4" id="form">
-  <%= form_with model: Link.new, builder: MaterialFormBuilder, data: { controller: "material-web-rails" }, html: { class: "flex flex-row gap-6 items-center" } do |f| %>
+  <%= form_with model: Link.new, builder: MaterialFormBuilder, data: { controller: "material-form" }, html: { class: "flex flex-row gap-6 items-center" } do |f| %>
     <%= f.text_field :url, class: "grow", label: "URL" %>
     <%= f.button "Submit", type:"submit", class: "mdc-button--raised" %>
   <% end %>

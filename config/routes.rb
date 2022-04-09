@@ -3,7 +3,12 @@
 Rails.application.routes.draw do
   get 'bookmarks/create'
 
-  resources :links, only: %i[index create destroy show]
+  resources :links, only: %i[index create destroy show] do
+    member do
+      resource :page, only: %i[show]
+    end
+  end
+
   get 'logins/new'
   get 'logins/index'
   get 'logins/callbacks', to: 'logins/callbacks#create'

@@ -2,16 +2,16 @@
 
 class LinksController < ApplicationController
   def index
-    render locals: { links: user.links.order(created_at: :desc).includes(:page), user: }
+    render locals: { links: user.links.order(created_at: :desc), user: }
   end
 
   def show
-    render locals: { link: user.links.find(params[:id]) }
+    render locals: { user:, link: user.links.find(params[:id]), title: 'Loading...' }
   end
 
   def create
     link = Link.new(create_params.merge(user:))
-    return render locals: { link:, page: link.page } if link.save
+    return render locals: { link: } if link.save
 
     render_flash_error(link.errors.full_messages.join(', ').strip)
   end

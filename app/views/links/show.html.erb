@@ -1,1 +1,7 @@
-<%= raw link.page.parsed %>
+<div class="flex flex-row w-full justify-center" id="<%= dom_id(link, :page) %>">
+  <h1 class="text-3xl pb-4"><%= title %></h1>
+  <iframe class="h-screen w-3/5" sandbox>
+
+  </iframe>
+</div>
+<%= turbo_stream_from user.identity, :page, channel: PageChannel %>
