@@ -7,8 +7,6 @@ class TokenExchanger
     new.exchange_code(code)
   end
 
-  def initialize; end
-
   def exchange_code(code)
     id_tokens = JWT.decode JSON.parse(fetch_token(code).body)['id_token'], nil, false
     id_tokens.first
